@@ -1,399 +1,337 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
-  ignoreTitleTemplate: true,
+  title: '公共工程與消防實績一覽',
+  description:
+    '有限責任新北市原住民第一水電消防勞動合作社——專精校園、原鄉與政府機關之消防安全設備改善、水電與整建工程，累積超過 180 件公共工程經驗。',
 };
+
+// 關鍵數字：摘要
+const stats = [
+  {
+    label: '累積公共工程實績',
+    value: '180+ 件',
+    note: '自民國 100 年起，持續承攬各級學校與機關之消防及整建工程。',
+  },
+  {
+    label: '專業服務經驗',
+    value: '20+ 年',
+    note: '從校園到營區，長期參與公共建築安全與環境改善。',
+  },
+  {
+    label: '服務縣市',
+    value: '7+ 縣市',
+    note: '新北、桃園復興、花蓮、台東、宜蘭、新竹等地皆有實績。',
+  },
+  {
+    label: '合作機關類型',
+    value: '學校・政府・國營事業・社福',
+    note: '含中央部會、地方政府、國營事業與社福機構等多元場域。',
+  },
+];
+
+// 主要服務對象
+const audiences = [
+  {
+    title: '國中小、高中職與特殊教育學校',
+    description:
+      '長期配合新北市及其他縣市之國中小、高中與特教學校，執行消防安全設備改善、建物公共安全改善及災後復建。',
+    examples: ['新北市多所國中小消防安全設備改善', '新北特殊教育學校消防設備改善'],
+  },
+  {
+    title: '原鄉與山區學校',
+    description:
+      '深耕桃園復興區及山區學校，協助在地校園進行宿舍、運動場、景觀與無障礙環境整建，熟悉偏鄉施工與協調條件。',
+    examples: ['桃園市復興區多所國小整建工程', '山區校園風災後復建及耐震補強'],
+  },
+  {
+    title: '中央部會與國營事業',
+    description:
+      '承攬國防部、油品公司、中央健保局等機關之消防設備檢修、維護保養與安全改善工程，理解大型機關的安全與稽核要求。',
+    examples: ['國防部多年度營區消防檢修申報案', '台灣中油加油站消防設備維護長約'],
+  },
+  {
+    title: '社福機構與地方政府單位',
+    description:
+      '協助社福機構、衛生單位及地方機關進行空間改善與消防安全提升，兼顧服務對象友善與法規合規。',
+    examples: ['社福基金會分院室內裝修改善-消防', '新北市社區營養推廣中心環境建置'],
+  },
+];
+
+// 核心專業領域
+const specialties = [
+  '校園消防安全設備改善與檢修',
+  '火警受信總機更新及系統整合',
+  '加油站與營區消防設備維護保養',
+  '校舍耐震、防水及公共安全改善',
+  '原鄉與山區學校整建與災後復建',
+  '室內裝修配合水電與消防調整',
+  '無障礙空間與動線優化',
+  '長期消防檢修申報與合規協助',
+];
+
+// 代表性工程情境
+const featuredGroups = [
+  {
+    title: '校園消防安全設備改善：從國小到高中職的長期合作',
+    summary:
+      '自民國 100 年起，持續承攬新北市多所國中小及高中之消防安全設備改善工程，包含偵煙感知器、廣播系統、緊急照明與逃生指示等，協助校園通過建築物公共安全與消防安檢。',
+    highlights: [
+      '熟悉國中小校園現況與上課作息，可配合夜間與寒暑假施工。',
+      '可同時與學校總務、監造單位及消防單位協調，降低學校溝通負擔。',
+      '多年度持續委辦，顯示履約品質與服務穩定度獲得肯定。',
+    ],
+    tags: ['新北市國中小', '消防改善', '公共安全檢查'],
+  },
+  {
+    title: '原鄉與山區學校：安全、機能與文化的兼顧',
+    summary:
+      '在桃園復興區與其他山區國小，承作宿舍與教室空間整建、風災後復建、運動場與景觀空間改善等工程，尊重在地文化與環境條件，讓校園在安全升級的同時保留原有特色。',
+    highlights: [
+      '熟悉山區交通與工期變數，能預先評估材料運輸與施工順序。',
+      '協助學校合理分配預算於安全、機能與環境美化。',
+      '多所學校連續合作，便於橫向分享成功作法與經驗。',
+    ],
+    tags: ['桃園復興區', '山區校園', '整建與復建'],
+  },
+  {
+    title: '國防與油品設施：高標準消防系統維護',
+    summary:
+      '承攬國防部營區及油品事業部加油站之消防設備檢修與維護保養，對系統穩定性與法規合規性要求嚴格，累積實務經驗可回饋至校園與一般建築之消防設計與改善。',
+    highlights: [
+      '熟悉軍方與國營事業的安全規範與稽核流程。',
+      '能配合高安全性環境之出入管制與施工紀錄要求。',
+      '了解油品與營區特殊風險，善於規劃檢修順序與應變措施。',
+    ],
+    tags: ['國防部', '加油站', '消防維護保養'],
+  },
+  {
+      title: '社福與醫療相關空間：照顧使用者與照顧者的安全',
+    summary:
+      '參與社福機構分院、營養推廣中心等空間之消防改善與室內裝修工程，重視動線順暢、避難便利及設備標示清楚，讓行動不便者與工作人員都能安心使用。',
+    highlights: [
+      '理解長照與社福場域的服務模式與使用動線。',
+      '裝修與設備更新同步考慮清潔維護與未來調整彈性。',
+      '協助機構因應稽核與評鑑時的安全設備需求。',
+    ],
+    tags: ['社福機構', '營養推廣中心', '室內裝修與消防'],
+  },
+];
+
+// 合作流程與保證
+const guarantees = [
+  '依據招標文件與相關法規辦理，配合監造與技師完成必要檢驗及申報。',
+  '工程前可先行會勘，協助釐清現況與預估施工對使用的影響。',
+  '重視工區安全與環境維護，降低對學生、教職員及民眾的干擾。',
+  '提供完工後簡要紀錄與必要圖說，利於後續維護與查驗。',
+];
+
+export const prerender = true;
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  {/* HERO：橘→深藍漸層，整合公司名＋公共工程標題 */}
+  {/* HERO：背景圖片 + 漸層 + 公司名 */}
+  <section class="relative overflow-hidden bg-slate-950">
+    {/* 背景圖 */}
+    <div
+      class="pointer-events-none absolute inset-0 bg-cover bg-center"
+      style="background-image: url('/images/public-works-hero.jpg');"
+    />
+    {/* 上方由深藍到黑的漸層疊在背景圖上，文字才看得清楚 */}
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/92 to-slate-950" />
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-      { text: 'Learn more', href: '#features' },
-    ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
-  >
-    <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro 5.0</span> + Tailwind CSS
-    </Fragment>
+    <div class="relative mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-14 pt-24 sm:px-6 lg:px-8 sm:pt-28">
+      {/* 上半：公司抬頭＋主標題 */}
+      <div class="max-w-3xl space-y-3">
+        <p class="text-xs sm:text-sm font-semibold tracking-[0.22em] text-primary-300 uppercase">
+          有限責任新北市原住民第一水電消防勞動合作社
+        </p>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-slate-50">
+          專精校園與公共空間的
+          <span class="block text-primary-200">
+            原住民水電消防合作社團隊
+          </span>
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-200/90 leading-relaxed">
+          新北市原住民在地專業團隊，整合消防、水電與裝修三大專業，長期服務國中小、高中職、
+          原鄉學校、中央與地方機關、國營事業與社福機構，協助公共建築符合安全規範並提升使用品質。
+        </p>
+      </div>
 
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 5.0
-        + Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
-      Blogs.
-    </Fragment>
-  </Hero>
+      {/* 下半：小標＋四個關鍵數字卡片 */}
+      <div class="space-y-5">
+        <div class="max-w-3xl">
+          <p class="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-primary-200">
+            公共工程與消防實績一覽
+          </p>
+          <p class="mt-1 text-xs sm:text-sm text-slate-200/95">
+            用幾個關鍵數字，讓您在幾秒內掌握我們的公共工程經驗與服務範圍。
+          </p>
+        </div>
 
-  <!-- Note Widget ******************* -->
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((item) => (
+            <div class="rounded-2xl border border-primary-400/40 bg-slate-950/70 p-4 shadow-sm backdrop-blur">
+              <div class="text-[11px] sm:text-xs font-medium text-primary-100/90">
+                {item.label}
+              </div>
+              <div class="mt-2 text-xl sm:text-2xl font-semibold text-primary-50">
+                {item.value}
+              </div>
+              <p class="mt-2 text-[11px] sm:text-xs text-slate-100/85 leading-relaxed">
+                {item.note}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
 
-  <!-- Features Widget *************** -->
+  {/* 主要服務對象 */}
+  <section class="bg-slate-950 py-12 sm:py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-10">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-semibold text-slate-50">
+          我們最常服務的對象
+        </h2>
+        <p class="mt-3 text-sm sm:text-base text-slate-300">
+          如果您是下列單位之一，我們過去很可能已經在您鄰近的學校或機關完成類似工程，
+          可以直接分享實際經驗與做法。
+        </p>
+      </div>
 
-  <Features
-    id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023 and 2024."
-    items={[
-      {
-        title: 'Astro + Tailwind CSS Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
-      },
-      {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
-      },
-      {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
-      },
-      {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
-      },
-      {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-  />
+      <div class="grid gap-6 md:grid-cols-2">
+        {audiences.map((a) => (
+          <article class="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-sm">
+            <h3 class="text-base sm:text-lg font-semibold text-slate-50">
+              {a.title}
+            </h3>
+            <p class="mt-2 text-xs sm:text-sm text-slate-200 leading-relaxed">
+              {a.description}
+            </p>
+            <ul class="mt-3 space-y-1 text-[11px] sm:text-xs text-slate-300">
+              {a.examples.map((ex) => (
+                <li>• {ex}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <!-- Content Widget **************** -->
+  {/* 核心專業領域 */}
+  <section class="bg-slate-950 pb-4 sm:pb-6">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 sm:p-6">
+        <h2 class="text-lg sm:text-xl font-semibold text-slate-50">
+          核心專業領域
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-slate-300">
+          我們整合消防、水電與裝修工程，專注在「公共建築安全」與「實際使用者體驗」之間取得平衡：
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          {specialties.map((s) => (
+            <span class="inline-flex items-center rounded-full border border-secondary-400/40 bg-secondary-500/10 px-2.5 py-0.5 text-[11px] font-medium text-secondary-100">
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Content
-    isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
-    items={[
-      {
-        title: 'Built on top of Astro 5.0',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
-      },
-      {
-        title: 'Styled using Tailwind CSS',
-        description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
-      },
-      {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
-    </Fragment>
+  {/* 代表性工程情境 */}
+  <section class="bg-slate-950 py-10 sm:py-14">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-10">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl font-semibold text-slate-50">
+          代表性工程情境
+        </h2>
+        <p class="mt-3 text-sm sm:text-base text-slate-300">
+          以下以幾種典型情境，概略說明我們在不同場域中如何規劃與執行工程。
+        </p>
+      </div>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+      <div class="grid gap-6 md:grid-cols-2">
+        {featuredGroups.map((group) => (
+          <article class="flex flex-col rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-sm">
+            <header>
+              <h3 class="text-base sm:text-lg font-semibold text-slate-50">
+                {group.title}
+              </h3>
+            </header>
 
-  <!-- Content Widget **************** -->
+            <p class="mt-3 text-xs sm:text-sm text-slate-200 leading-relaxed">
+              {group.summary}
+            </p>
 
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
+            <ul class="mt-3 space-y-1 text-[11px] sm:text-xs text-slate-300">
+              {group.highlights.map((h) => (
+                <li>• {h}</li>
+              ))}
+            </ul>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {group.tags.map((tag) => (
+                <span class="inline-flex items-center rounded-full border border-secondary-400/40 bg-secondary-500/10 px-2 py-0.5 text-[10px] font-medium text-secondary-100">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <!-- Content Widget **************** -->
+  {/* 合作流程與保證 + CTA */}
+  <section class="bg-slate-950 pb-16 sm:pb-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid gap-8 lg:grid-cols-[1.4fr,1fr] items-start">
+      <div class="space-y-4">
+        <h2 class="text-xl sm:text-2xl font-semibold text-slate-50">
+          合作流程與品質保證
+        </h2>
+        <p class="text-sm text-slate-300">
+          我們理解公共工程在預算、工期與安全要求上的壓力，因此在每一案中重視溝通、紀錄與後續使用者感受：
+        </p>
+        <ul class="mt-2 space-y-2 text-xs sm:text-sm text-slate-200">
+          {guarantees.map((g) => (
+            <li class="flex gap-2">
+              <span class="mt-[5px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-400" />
+              <span>{g}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Steps Widget ****************** -->
-
-  <Steps
-    title="Get your dream website up and running in no time with AstroWind."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Download</span>',
-        description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
-        description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
-        description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
-      },
-      {
-        title: 'Ready!',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
-    }}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
-    items={[
-      {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
-      },
-      {
-        title: 'Heros',
-        description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
-      },
-      {
-        title: 'Features',
-        description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
-      },
-      {
-        title: 'Content',
-        description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
-      },
-      {
-        title: 'Call-to-Action',
-        description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
-
-  <!-- HighlightedPosts Widget ******* -->
-
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'Why AstroWind?',
-        description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
-      },
-      {
-        title: 'What do I need to start?',
-        description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
-      },
-      {
-        title: 'How to install the Astro + Tailwind CSS template?',
-        description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
-      },
-      {
-        title: "What's something that you don't understand?",
-        description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
-      },
-      {
-        title: 'What is something that you would like to try again?',
-        description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-      },
-      {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
-      },
-    ]}
-  />
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
-    </Fragment>
-  </CallToAction>
+      <div class="rounded-2xl border border-primary-500/40 bg-primary-500/10 p-5 sm:p-6">
+        <h3 class="text-lg font-semibold text-primary-100">
+          想確認您單位的需求是否適合由我們協助？
+        </h3>
+        <p class="mt-2 text-xs sm:text-sm text-primary-50/90">
+          無論是校園消防設備改善、營區消防檢修、原鄉學校整建，或是社福機構空間優化，
+          歡迎將現況與預算條件告訴我們，我們可以先以「會勘＋建議方向」的方式協助您評估。
+        </p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a
+            href="/contact"
+            class="inline-flex items-center rounded-full bg-primary px-4 py-2 text-xs sm:text-sm font-semibold text-slate-950 shadow hover:bg-primary-400 transition"
+          >
+            聯絡我們，討論工程需求
+          </a>
+          <a
+            href="/about"
+            class="inline-flex items-center rounded-full border border-secondary-300/70 px-4 py-2 text-xs sm:text-sm font-semibold text-secondary-100 hover:bg-secondary-500/10 transition"
+          >
+            了解合作社與團隊背景
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
